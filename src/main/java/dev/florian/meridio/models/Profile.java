@@ -16,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -44,11 +43,11 @@ public class Profile {
         inverseJoinColumns=@JoinColumn(name="role_id" ,referencedColumnName="id"))
     List<Role> roles = new ArrayList<>();
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Space> spaces = new ArrayList<>();
 
-    @OneToOne(mappedBy="profile")
-    private Acl acl;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Acl> acls = new ArrayList<>();
 
     @DateTimeFormat
     private LocalDateTime createdAt;
@@ -113,12 +112,17 @@ public class Profile {
         this.spaces = spaces;
     }
 
-    public Acl getAcl() {
-        return acl;
+    public List<Acl> getAcls() {
+        return acls;
     }
 
-    public void setAcl(AclType aclType) {
-        this.acl.setType(aclType);
+    public void setAcls(AclType aclType, Long spaceId) {
+        for (Acl acl : this.acls) {
+            if (acl.getSpace().getId().equals(spaceId)) {
+                acl.setType(aclType);
+                break;
+            }
+        }
     }
 
     public LocalDateTime getCreatedAt() {

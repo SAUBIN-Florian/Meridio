@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -21,11 +21,11 @@ public class Acl {
     @Enumerated(EnumType.STRING)
     private AclType type;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="profile_id")
     private Profile profile;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="space_id")
     private Space space;
 

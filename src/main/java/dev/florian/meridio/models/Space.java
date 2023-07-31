@@ -14,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotNull;
 
@@ -31,8 +30,8 @@ public class Space {
     @ManyToOne()
     private Profile profile;
 
-    @OneToOne(mappedBy="space")
-    private Acl acl;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Acl> acls = new ArrayList<>();
 
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     List<File> files = new ArrayList<>();
@@ -70,12 +69,17 @@ public class Space {
         return profile;
     }
 
-    public Acl getAcl() {
-        return acl;
+    public List<Acl> getAcls() {
+        return this.acls;
     }
 
-    public void setType(AclType aclType) {
-        this.acl.setType(aclType);
+    public void setAcls(AclType aclType, Long spaceId) {
+        for (Acl acl : this.acls) {
+            if (acl.getSpace().getId().equals(spaceId)) {
+                acl.setType(aclType);
+                break;
+            }
+        }
     }
 
     public List<File> getFiles() {
@@ -100,7 +104,7 @@ public class Space {
 
     @Override
     public String toString() {
-        return "Space [id=" + id + ", title=" + title + ", acl=" + acl + ", createdAt=" + createdAt + ", updatedAt="
+        return "Space [id=" + id + ", title=" + title + ", createdAt=" + createdAt + ", updatedAt="
                 + updatedAt + "]";
     }
 }
