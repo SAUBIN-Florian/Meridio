@@ -6,18 +6,9 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -28,13 +19,17 @@ public class Profile {
     private Long id;
 
     @NotNull
+    @NotEmpty
+    @Column(unique=true)
     private String username;
 
     @NotNull
+    @NotEmpty
     @Email
     private String email;
 
     @NotNull
+    @NotEmpty
     private String password;
 
     @ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -57,7 +52,7 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(@NotNull String username, @NotNull @Email String email, @NotNull String password) {
+    public Profile(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -100,8 +95,8 @@ public class Profile {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role role) {
+        this.roles.add(role);
     }
 
     public List<Space> getSpaces() {
