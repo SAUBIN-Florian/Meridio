@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,13 +29,12 @@ public class SpringSecurity {
             .csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
-                auth.requestMatchers("/", "/auth/**").permitAll();
+                auth.requestMatchers("/", "/auth/register").permitAll();
                 auth.requestMatchers("/**").authenticated();
                 auth.anyRequest().denyAll();
             })
             .userDetailsService(this.userDetailsService)
             .formLogin(form -> form.loginPage("/auth/login").permitAll())
-            .logout(Customizer.withDefaults())
             .headers(header -> header.frameOptions(h -> h.sameOrigin()))
             .build();
     }

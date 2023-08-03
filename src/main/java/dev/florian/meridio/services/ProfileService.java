@@ -54,4 +54,8 @@ public class ProfileService {
             throw new Exception("Profile not found, id: " + id);
         }
     }
+
+    public boolean existsByUsername(String username) {
+        return this.profileRepository.existsByUsername(username);
+    }
 }

@@ -16,7 +16,6 @@ public class CurrentUser implements UserDetails {
         this.currentUser = profile;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.currentUser.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).toList();
