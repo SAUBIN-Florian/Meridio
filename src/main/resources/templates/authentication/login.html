@@ -4,26 +4,38 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.min.css}" />
     <title>Login | Meridio</title>
 </head>
 <body>
     <h2>Login</h2>
 
-    <form th:action="@{/auth/login}" th:object="${profile}" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" th:field="*{username}" />
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" th:field="*{password}" />
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </div>
-
-        <div>
-            <button type="submit">SUBMIT</button>
-        </div>
-    </form>
+    <div class="container m-auto w-full max-w-xs">
+        <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/auth/login}" th:object="${profile}" method="post">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text" id="username" name="username" th:field="*{username}" 
+                />
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="password" id="password" name="password" th:field="*{password}" 
+                />
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                  Log In
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                  Forgot Password?
+                </a>
+              </div>
+        </form>
+    </div>
 </body>
 </html>

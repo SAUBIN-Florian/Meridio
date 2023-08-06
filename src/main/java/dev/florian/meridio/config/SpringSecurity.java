@@ -29,6 +29,7 @@ public class SpringSecurity {
             .csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
+                auth.requestMatchers("/css/**", "/js/**").permitAll();
                 auth.requestMatchers("/", "/auth/register").permitAll();
                 auth.requestMatchers("/**").authenticated();
                 auth.anyRequest().denyAll();
