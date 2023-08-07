@@ -9,9 +9,9 @@
     <title>Registration | Meridio</title>
 </head>
 <body>
-    <h2>Registration</h2>
-
+    
     <div class="container m-auto w-full max-w-xs">
+        <h2 class="text-xl my-4 font-bold text-blue-500">Registration</h2>
         <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/auth/register}" th:object="${profile}" method="post">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
@@ -34,13 +34,14 @@
                 />
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
             </div>
-            <div>
+            <div class="flex flex-col">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Register
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" th:href="@{/auth/login}">
-                  Already have an account ?
-                </a>
+                <span class="mt-4 text-xs">Already have an account ? <a class="font-bold text-xs text-blue-500 hover:text-blue-800" th:href="@{/auth/login}">
+                    Log in
+                  </a> now !
+                </span>
             </div>
         </form>
     </div>

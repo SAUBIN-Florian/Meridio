@@ -9,9 +9,9 @@
     <title>Login | Meridio</title>
 </head>
 <body>
-    <h2>Login</h2>
-
+    
     <div class="container m-auto w-full max-w-xs">
+        <h2 class="text-xl font-bold text-blue-500 my-4">Login</h2>
         <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4" th:action="@{/auth/login}" th:object="${profile}" method="post">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
@@ -35,6 +35,7 @@
                   Forgot Password?
                 </a>
               </div>
+              <span class="inline-block text-xs mt-4">Don't have an account yet ? <a th:href="@{/auth/register}" class="font-bold text-xs text-blue-500 hover:text-blue-800">Register</a> now !</span>
         </form>
     </div>
 </body>

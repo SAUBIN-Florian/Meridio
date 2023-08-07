@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.min.css}" />
+    <script th:src="@{/js/flowbite.min.js}" defer></script>
     <title>Home | Meridio</title>
 </head>
 <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <div id="meridio-app">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        <div id="main-content">
+            <!-- Main content injected here -->
+        </div>
+    </div>
 </body>
 </html>

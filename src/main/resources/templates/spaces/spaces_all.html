@@ -7,12 +7,17 @@
     <title>Spaces | Meridio</title>
 </head>
 <body>
-    <h2>Spaces List</h2>
-
-    <ul>
-        <li th:each="space : ${spaces}">
-            <span>[[${space.getTitle()}]]</span>
-        </li>
-    </ul>
+    <div id="meridio-app">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        <div id="main-content">
+            <h2>Spaces List</h2>
+            <ul>
+                <li th:each="space : ${spaces}">
+                    <span>[[${space.getTitle()}]]</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

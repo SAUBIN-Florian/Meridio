@@ -3,3 +3,35 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+#meridio-app {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "nav nav nav"
+        "sid man man";
+    grid-template-rows: 1fr 11fr;
+    grid-template-columns: 2fr 10fr;
+}
+
+#navbar-content {
+    grid-area: nav;
+    /* Remove bg-color test only */
+    background-color: lightblue;
+}
+
+#sidebar-content {
+    grid-area: sid;
+    /* Remove bg-color test only */
+    background-color: lightcoral;
+    
+}
+
+#main-content {
+    grid-area: man;
+    overflow-y: scroll;
+    /* Remove bg-color test only */
+    background-color: lightgreen;
+    
+}
