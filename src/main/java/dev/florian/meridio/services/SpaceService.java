@@ -12,10 +12,12 @@ import dev.florian.meridio.repositories.SpaceRepository;
 @Service
 public class SpaceService {
     private final SpaceRepository spaceRepository;
+    private final AclService aclService;
 
     @Autowired
-    public SpaceService(SpaceRepository spaceRepository) {
+    public SpaceService(SpaceRepository spaceRepository, AclService aclService) {
         this.spaceRepository = spaceRepository;
+        this.aclService = aclService;
     }
 
     public List<Space> findAll() {
@@ -40,7 +42,7 @@ public class SpaceService {
 
             this.spaceRepository.save(existingSpace);
         } else {
-            throw new Exception("Profile not found, title: " + space.getTitle());
+            throw new Exception("Space not found, title: " + space.getTitle());
         }
     }
 

@@ -32,7 +32,7 @@ public class Acl {
     public Acl() {
     }
 
-    public Acl(@NotNull AclType type) {
+    public Acl(AclType type) {
         this.type = type;
     }
 

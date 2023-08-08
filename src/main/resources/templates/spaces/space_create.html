@@ -7,14 +7,21 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.min.css}" />
     <script th:src="@{/js/flowbite.min.js}" defer></script>
-    <title>Home | Meridio</title>
+    <title>Spaces | Meridio</title>
 </head>
 <body>
-    <div id="meridio-app" th:object="${current_user}">
+    <div id="meridio-app">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div th:replace="~{fragments/sidebar :: sidebar}"></div>
         <div id="main-content">
-            <!-- Main content injected here -->
+            <h2>New Space</h2>
+            <form th:action="@{/spaces/new}" method="POST">
+                <div>
+                    <label for="title"></label>
+                    <input type="text" id="title" name="title" th:field="${space.title}">
+                </div>
+                <input type="submit" value="SUBMIT">
+            </form>
         </div>
     </div>
 </body>

@@ -44,7 +44,7 @@ public class Space {
 
     public Space() {}
 
-    public Space(@NotNull String title) {
+    public Space(String title) {
         this.title = title;
     }
 

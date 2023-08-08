@@ -38,7 +38,7 @@ public class File {
 
     public File() {}
 
-    public File(@NotNull String fileName, @NotNull String type, @NotNull String filePath) {
+    public File(String fileName, String type, String filePath) {
         this.fileName = fileName;
         this.type = type;
         this.filePath = filePath;

@@ -22,13 +22,21 @@ public class CurrentUser implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return this.currentUser.getPassword();
+    public String getUsername() {
+        return this.currentUser.getUsername();
+    }
+
+    public Long getId() {
+        return this.currentUser.getId();
+    }
+
+    public String getEmail() {
+        return this.currentUser.getEmail();
     }
 
     @Override
-    public String getUsername() {
-        return this.currentUser.getUsername();
+    public String getPassword() {
+        return this.currentUser.getPassword();
     }
 
     @Override
