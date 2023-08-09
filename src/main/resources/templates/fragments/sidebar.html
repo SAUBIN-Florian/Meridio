@@ -6,14 +6,15 @@
 </head>
 <body>
     <div id="sidebar-content" th:fragment="sidebar">
-        <h4>Sidebar</h4>
-        <ul>
-            <li>Spaces</li>
-            <li>Friends</li>
-            <li>Subscriptions</li>
-            <li>Settings</li>
-            <li>Legals</li>
-        </ul>
+        <div class="sidebar-child border-r bg-neutral-300">
+            <ul class="flex flex-col p-4">
+                <li><a th:href="@{/spaces}">Spaces</a></li>
+                <li>Friends</li>
+                <li>Subscriptions</li>
+                <li>Settings</li>
+                <li>Legals</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

@@ -6,12 +6,11 @@
 </head>
 <body>
     <div id="navbar-content" th:fragment="navbar">
-        <div class="flex justify-between px-4">
-            <h4>Navbar</h4>
+        <div class="navbar-child flex justify-between items-center px-4 border-b bg-neutral-300">
+            <h4>Meridio</h4>
             <ul class="flex">
-                <li class="px-2">Home</li>
-                <li class="px-2">Test</li>
-                <li class="px-2">Mock</li>
+                <li class="px-2"><a th:href="@{/}">Home</a></li>
+                <li class="px-2"><a th:href="@{/spaces/new}">New Space</a></li>
                 <li class="px-2">
                     <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                         <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->

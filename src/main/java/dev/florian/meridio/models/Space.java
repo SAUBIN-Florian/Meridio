@@ -69,17 +69,16 @@ public class Space {
         return profile;
     }
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
     public List<Acl> getAcls() {
         return this.acls;
     }
 
-    public void setAcls(AclType aclType, Long spaceId) {
-        for (Acl acl : this.acls) {
-            if (acl.getSpace().getId().equals(spaceId)) {
-                acl.setType(aclType);
-                break;
-            }
-        }
+    public void setAcls(Acl acl) {
+        this.acls.add(acl);
     }
 
     public List<File> getFiles() {

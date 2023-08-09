@@ -103,21 +103,16 @@ public class Profile {
         return spaces;
     }
 
-    public void setSpaces(List<Space> spaces) {
-        this.spaces = spaces;
+    public void setSpaces(Space space) {
+        this.spaces.add(space);
     }
 
     public List<Acl> getAcls() {
         return acls;
     }
 
-    public void setAcls(AclType aclType, Long spaceId) {
-        for (Acl acl : this.acls) {
-            if (acl.getSpace().getId().equals(spaceId)) {
-                acl.setType(aclType);
-                break;
-            }
-        }
+    public void setAcls(Acl acl) {
+        this.acls.add(acl);
     }
 
     public LocalDateTime getCreatedAt() {

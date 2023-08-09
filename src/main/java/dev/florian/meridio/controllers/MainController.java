@@ -1,6 +1,8 @@
 package dev.florian.meridio.controllers;
 
 
+import java.security.Principal;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +19,11 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-public class SpaceController {
+public class MainController {
     
     private final SpaceService spaceService;
 
-    public SpaceController(SpaceService spaceService) {
+    public MainController(SpaceService spaceService) {
         this.spaceService = spaceService;
     }
 
@@ -53,11 +55,11 @@ public class SpaceController {
     }
 
     @PostMapping("/spaces/new")
-    public String CreateSpaceValidations(@Valid Space space, BindingResult validations) {
+    public String CreateSpaceValidations(@Valid Space space, BindingResult validations, Principal principal) {
         if(validations.hasErrors()) {
             return "spaces/space_create";
         }
-        this.spaceService.save(space);
+        this.spaceService.save(space, principal);
         return "redirect:/spaces";
     }
 }

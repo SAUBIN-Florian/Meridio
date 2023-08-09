@@ -28,6 +28,10 @@ public class ProfileService {
         return this.profileRepository.findById(id).get();
     }
 
+    public Profile findByUsername(String username) {
+        return this.profileRepository.findByUsername(username).get();
+    }
+
     public void save(Profile profile) {
         this.profileRepository.save(profile);
     }

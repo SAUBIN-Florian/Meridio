@@ -17,21 +17,23 @@
 
 #navbar-content {
     grid-area: nav;
-    /* Remove bg-color test only */
-    background-color: lightblue;
 }
 
 #sidebar-content {
     grid-area: sid;
-    /* Remove bg-color test only */
-    background-color: lightcoral;
     
 }
 
 #main-content {
     grid-area: man;
     overflow-y: scroll;
-    /* Remove bg-color test only */
-    background-color: lightgreen;
     
+}
+
+.navbar-child {
+    height: 100%;
+}
+
+.sidebar-child {
+    height: 100%;
 }
