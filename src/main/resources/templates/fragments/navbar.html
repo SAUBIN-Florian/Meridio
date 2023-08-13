@@ -6,14 +6,14 @@
 </head>
 <body>
     <div id="navbar-content" th:fragment="navbar">
-        <div class="navbar-child flex justify-between items-center px-4 border-b bg-neutral-300">
+        <div class="navbar-child flex justify-between items-center px-6 border-b">
             <h4>Meridio</h4>
             <ul class="flex">
-                <li class="px-2"><a th:href="@{/}">Home</a></li>
-                <li class="px-2"><a th:href="@{/spaces/new}">New Space</a></li>
+                <li class="px-2" th:classappend="${activePage == 'index' ? 'font-bold text-blue-500' : ''}"><a th:href="@{/}">Home</a></li>
+                <li class="px-2" th:classappend="${activePage == 'space_new' ? 'font-bold text-blue-500' : ''}"><a th:href="@{/spaces/new}">New Space</a></li>
                 <li class="px-2">
-                    <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <button id="navbar-dropdown-button" data-dropdown-toggle="navbar-dropdown" class="bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        <?xml version="1.0" encoding="utf-8"?>
                         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 18L20 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                         <path d="M4 12L20 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
@@ -22,12 +22,12 @@
                     </button>
     
                     <!-- Dropdown menu -->
-                    <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <div id="navbar-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                         <div>[[${current_user.getUsername()}]]</div>
                         <div class="font-medium truncate">[[${current_user.getEmail()}]]</div>
                         </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="navbar-dropdown-button">
                         <li>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                         </li>

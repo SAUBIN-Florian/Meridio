@@ -7,14 +7,14 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.min.css}" />
     <script th:src="@{/js/flowbite.min.js}" defer></script>
-    <title>Space | Meridio</title>
+    <title>Home | Meridio</title>
 </head>
 <body>
-    <div id="meridio-app">
+    <div id="meridio-app" th:object="${current_user}">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div th:replace="~{fragments/sidebar :: sidebar}"></div>
-        <div id="main-content" class="p-4">
-            <h2>Space: [[${space.getTitle()}]]'s details</h2>
+        <div id="main-content" class="px-4">
+            <h2>File Details</h2>
         </div>
     </div>
 </body>

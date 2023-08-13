@@ -46,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerValidation(@Valid Profile profile, BindingResult bindingResult) {
+    public String registerValidation(@Valid Profile profile, BindingResult bindingResult) throws IllegalArgumentException {
         if(bindingResult.hasErrors()) {
             return "authentication/register";
         } else {

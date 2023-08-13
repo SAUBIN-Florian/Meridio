@@ -6,13 +6,23 @@
 </head>
 <body>
     <div id="sidebar-content" th:fragment="sidebar">
-        <div class="sidebar-child border-r bg-neutral-300">
-            <ul class="flex flex-col p-4">
-                <li><a th:href="@{/spaces}">Spaces</a></li>
-                <li>Friends</li>
-                <li>Subscriptions</li>
-                <li>Settings</li>
-                <li>Legals</li>
+        <div class="sidebar-child border-r">
+            <ul class="p-4">
+                <li th:classappend="${activePage == 'spaces_list' ? 'active-link' : ''}" 
+                    class="rounded-lg"><a class="block w-100" th:href="@{/spaces}">Spaces</a>
+                </li>
+                <li th:classappend="${activePage == 'friends' ? 'active-link' : ''}" 
+                    class="rounded-lg">Friends
+                </li>
+                <li th:classappend="${activePage == 'sub' ? 'active-link' : ''}" 
+                    class="rounded-lg">Subscriptions
+                </li>
+                <li th:classappend="${activePage == 'settings' ? 'active-link' : ''}"
+                    class="rounded-lg">Settings
+                </li>
+                <li th:classappend="${activePage == 'legals' ? 'active-link' : ''}" 
+                    class="rounded-lg">Legals
+                </li>
             </ul>
         </div>
     </div>

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -26,7 +27,10 @@ public class SpringSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-            .csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+            .csrf(csrf -> {
+                csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+            })
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                 auth.requestMatchers("/css/**", "/js/**").permitAll();
