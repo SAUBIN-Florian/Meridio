@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -44,6 +45,11 @@ public class File {
         this.filePath = filePath;
     }
 
+    @PrePersist
+    public void init() {
+        this.createdAt = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
@@ -76,6 +82,10 @@ public class File {
         return space;
     }
 
+    public void setSpace(Space space) {
+        this.space = space;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -89,7 +99,7 @@ public class File {
 
     @Override
     public String toString() {
-        return "File [id=" + id + ", fileName=" + fileName + ", type=" + type + ", space=" + space + ", createdAt="
+        return "File [id=" + id + ", fileName=" + fileName + ", type=" + type + ", space=" + space.getTitle() + ", createdAt="
                 + createdAt + "]";
     }   
 }

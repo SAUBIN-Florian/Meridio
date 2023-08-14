@@ -85,8 +85,8 @@ public class Space {
         return files;
     }
 
-    public void setFiles(List<File> files) {
-        this.files = files;
+    public void setFiles(File file) {
+        this.files.add(file);
     }
 
     public LocalDateTime getCreatedAt() {

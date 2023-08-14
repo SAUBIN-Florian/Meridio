@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import dev.florian.meridio.models.File;
 import dev.florian.meridio.models.Space;
@@ -88,19 +90,15 @@ public class MainController {
 
     @GetMapping("/spaces/{spaceId}/file/new")
     public String createFile(@PathVariable Long spaceId, File file, Model model) {
-        model.addAttribute("space", this.spaceService.findById(spaceId));
+        model.addAttribute("spaceId", spaceId);
         return "files/file_create";
     }
 
     @PostMapping("/spaces/{spaceId}/file/new")
-    public String createFileValidations(@PathVariable Long spaceId, @Valid File file, 
-                                        BindingResult validations, Model model, Principal principal) {
-        if(validations.hasErrors()) {
-            return "files/file_create";
-        } else {
-            model.addAttribute("space", this.spaceService.findById(spaceId));
-            this.fileService.save(file, principal);
-            return "files/file_create";
+    public String createFileValidations(@PathVariable Long spaceId, @RequestParam MultipartFile file) {
+        if(!(file.isEmpty())) {
+            this.fileService.save(file, spaceId);
         }
+        return String.format("redirect:/spaces/%d", spaceId);
     }
 }

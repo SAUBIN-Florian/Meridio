@@ -14,7 +14,31 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div th:replace="~{fragments/sidebar :: sidebar}"></div>
         <div id="main-content" class="p-4">
-            <h2>Space: [[${space.getTitle()}]]'s details</h2>
+            <div class="space-detail-header flex justify-between items-center py-2 border-b">
+                <h2>Space: [[${space.getTitle()}]]'s details</h2>
+                <div class="flex justify-around">
+                    <a th:href="@{/spaces/{spaceId}/file/new(spaceId=${space.getId()})}" class="block px-4 py-2 hover:bg-blue-500 hover:text-white rounded-lg">Add a file</a>
+                    <p 
+                        th:if="${space.getProfile().getUsername() == current_user.getUsername()}" 
+                        th:attr="data-space-id=${space.getId()}" 
+                        data-modal-target="deleteModal" 
+                        data-modal-toggle="deleteModal" 
+                        class="delete-space-btn block px-4 py-2 hover:bg-red-500 hover:text-white rounded-lg" 
+                        style="cursor: pointer;"
+                    >
+                        Delete Space
+                    </p>
+                </div>
+            </div>
+
+            <!-- DELETE MODAL -->
+            <div th:replace="~{fragments/delete_modal :: delete-modal}"></div>
+
+            <ul>
+                <li th:each="file : ${space.getFiles()}">
+                    <span>[[${file.getFileName()}]]</span>
+                </li>
+            </ul>
         </div>
     </div>
 </body>
