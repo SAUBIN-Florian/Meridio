@@ -90,15 +90,25 @@ public class MainController {
 
     @GetMapping("/spaces/{spaceId}/file/new")
     public String createFile(@PathVariable Long spaceId, File file, Model model) {
+        model.addAttribute("errorMsg", null);
         model.addAttribute("spaceId", spaceId);
         return "files/file_create";
     }
 
     @PostMapping("/spaces/{spaceId}/file/new")
-    public String createFileValidations(@PathVariable Long spaceId, @RequestParam MultipartFile file) {
-        if(!(file.isEmpty())) {
-            this.fileService.save(file, spaceId);
+    public String createFileValidations(@PathVariable Long spaceId, @RequestParam MultipartFile file, Model model) {
+         if (file.isEmpty()) {
+            model.addAttribute("errorMsg", "Can't be empty !");
+        } else {
+            String originalFilename = file.getOriginalFilename();
+            if (this.fileService.existsByFileName(originalFilename)) {
+                model.addAttribute("errorMsg", "This file name is already taken !");
+            } else {
+                this.fileService.save(file, spaceId);
+                return String.format("redirect:/spaces/%d", spaceId);
+            }
         }
-        return String.format("redirect:/spaces/%d", spaceId);
+        
+        return "files/file_create";
     }
 }

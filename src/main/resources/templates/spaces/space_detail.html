@@ -23,8 +23,7 @@
                         th:attr="data-space-id=${space.getId()}" 
                         data-modal-target="deleteModal" 
                         data-modal-toggle="deleteModal" 
-                        class="delete-space-btn block px-4 py-2 hover:bg-red-500 hover:text-white rounded-lg" 
-                        style="cursor: pointer;"
+                        class="delete-space-btn block px-4 py-2 cursor-pointer hover:bg-red-500 hover:text-white rounded-lg"
                     >
                         Delete Space
                     </p>
@@ -36,7 +35,7 @@
 
             <ul>
                 <li th:each="file : ${space.getFiles()}">
-                    <span>[[${file.getFileName()}]]</span>
+                    <img th:src="@{/assets/{file}(file=${file.getFileName()})}" th:alt="${file.getFileName()}">
                 </li>
             </ul>
         </div>
