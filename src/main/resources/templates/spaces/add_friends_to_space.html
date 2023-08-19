@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tailwind.min.css}" />
+    <script th:src="@{/js/flowbite.min.js}" defer></script>
+    <script th:src="@{/js/searchForUsers.js}" defer></script>
+    <title>Home | Meridio</title>
+</head>
+<body>
+    <div id="meridio-app" th:object="${current_user}">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        <div id="main-content" class="px-4">
+            <div th:replace="~{fragments/searchbar :: searchbar}"></div>
+
+            <ul class="friends-list mt-4">
+                <!-- Injected via JS -->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

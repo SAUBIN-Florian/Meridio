@@ -45,8 +45,8 @@ public class MainController {
     }
 
     @GetMapping("/spaces")
-    public String allSpaces(Model model) {
-        model.addAttribute("spaces", this.spaceService.findAll());
+    public String allSpaces(Model model, Principal principal) {
+        model.addAttribute("spaces", this.spaceService.findByProfile(principal));
         model.addAttribute("activePage", "spaces_list");
         return "spaces/spaces_all";
     }

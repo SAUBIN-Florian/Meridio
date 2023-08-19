@@ -62,4 +62,8 @@ public class ProfileService {
     public boolean existsByUsername(String username) {
         return this.profileRepository.existsByUsername(username);
     }
+
+    public List<Profile> searchProfiles(String query) {
+        return this.profileRepository.findTop10ByUsernameContaining(query);
+    }
 }

@@ -16,7 +16,7 @@
         <div id="main-content" class="px-4">
             <span th:if="${errorMsg}" class="mb-2 font-bold text-red-500" th:text="${errorMsg}"></span>
             <form th:action="@{/spaces/{spaceId}/file/new(spaceId=${spaceId})}" enctype="multipart/form-data" method="POST">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
 
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
                 <input class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="file_input_help" id="file_input" name="file" type="file">

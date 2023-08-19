@@ -31,6 +31,11 @@ public class SpaceService {
         return this.spaceRepository.findAll();
     }
 
+    public List<Space> findByProfile(Principal principal) {
+        Profile currentUser = this.profileService.findByUsername(principal.getName());
+        return currentUser.getSpaces();
+    }
+
     public Space findById(Long id) {
         return this.spaceRepository.findById(id).get();
     }

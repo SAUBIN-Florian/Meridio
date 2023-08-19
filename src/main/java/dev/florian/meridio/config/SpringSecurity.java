@@ -28,8 +28,9 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(csrf -> {
-                csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
-                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                csrf.disable();
+                // csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+                // csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
             })
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
