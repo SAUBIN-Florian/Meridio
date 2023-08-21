@@ -21,6 +21,7 @@ const fetchUsersFromDatabase = async (query) => {
         return data;
     } catch (error) {
         console.log(error);
+        return [];
     }
 }
 
@@ -30,7 +31,6 @@ const sendInvitToDatabase = async (username, aclType) => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const spaceId = parts[parts.length - 2];
-    console.log(csrfToken);
 
     try {
         const response = await fetch(currentUrl, {

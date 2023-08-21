@@ -27,13 +27,19 @@ public class SpaceService {
         this.profileService = profileService;
     }
 
-    public List<Space> findAll() {
-        return this.spaceRepository.findAll();
-    }
-
-    public List<Space> findByProfile(Principal principal) {
+    public List<Space> findCurrentUserSpaces(Principal principal) {
         Profile currentUser = this.profileService.findByUsername(principal.getName());
         return currentUser.getSpaces();
+    }
+
+    public List<Space> findByAcl(Principal principal) {
+        Profile currentUser = this.profileService.findByUsername(principal.getName());
+
+        List<Space> spaces = this.spaceRepository.findAll().stream()
+            .filter(space -> space.getAcls().stream()
+                .anyMatch(acl -> acl.getProfile().equals(currentUser)))
+            .toList();
+        return spaces;
     }
 
     public Space findById(Long id) {

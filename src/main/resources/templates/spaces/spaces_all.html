@@ -14,38 +14,68 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div th:replace="~{fragments/sidebar :: sidebar}"></div>
         <div id="main-content" class="p-4">
-            <h2>Spaces List</h2>
-            <ul class="grid grid-cols-4 gap-2">
-                <li class="mx-auto my-2" th:each="space : ${spaces}">
-                    <div class="space-square rounded-lg bg-gray-300 w-48 h-48">
-                        <a th:href="@{/spaces/{spaceId}(spaceId=${space.getId()})}">
-                            <div class="space-options" th:id="${'space-dropdown-button-' + space.getId()}" th:data-dropdown-toggle="${'space-dropdown-' + space.getId()}" th:if="${space.getProfile().getUsername() == current_user.getUsername()}">
-                                <div th:id="${'space-dropdown-' + space.getId()}" class="z-10 hidden bg-white rounded-lg shadow w-44">
-                                    <ul class="py-2 text-sm text-gray-700" th:aria-labelledby="${'space-dropdown-button-' + space.getId()}">
-                                        <li>
-                                            <a href="?rename" class="block px-4 py-2 hover:bg-gray-100">Rename Space</a>
-                                        </li>
-                                        <li>
-                                            <p 
-                                                th:attr="data-space-id=${space.getId()}"
-                                                data-modal-target="deleteModal" 
-                                                data-modal-toggle="deleteModal" 
-                                                class="delete-space-btn block px-4 py-2 hover:bg-gray-100"
-                                            >
-                                                Delete Space
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
+            <div class="mb-4 border-b border-gray-200">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#all-spaces" type="button" role="tab" aria-controls="all-spaces" aria-selected="false">All Spaces</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="user-spaces-tab" data-tabs-target="#user-spaces" type="button" role="tab" aria-controls="user-spaces" aria-selected="false">My Spaces</button>
+                    </li>
+                </ul>
+            </div>
+            <div id="myTabContent">
+                <div class="hidden p-4 rounded-lg" id="all-spaces" role="tabpanel" aria-labelledby="all-spaces-tab">
+                    <ul class="grid grid-cols-4 gap-2">
+                        <li class="mx-auto my-2" th:each="space : ${spaces}">
+                            <div class="space-square rounded-lg bg-gray-300 w-48 h-48">
+                                <a th:href="@{/spaces/{spaceId}(spaceId=${space.getId()})}">
+                                    
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-xs">[[${space.getTitle()}]]</span>
-                        <span class="text-xs">Created by [[${space.getProfile().getUsername()}]]</span>
-                    </div>
-                </li>
-            </ul>
+                            <div class="flex flex-col">
+                                <span class="text-xs">[[${space.getTitle()}]]</span>
+                                <span class="text-xs">Created by [[${space.getProfile().getUsername()}]]</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hidden p-4 rounded-lg" id="user-spaces" role="tabpanel" aria-labelledby="user-spaces-tab">
+                    <ul class="grid grid-cols-4 gap-2">
+                        <li class="mx-auto my-2" th:each="space : ${userSpaces}">
+                            <div class="space-square rounded-lg bg-gray-300 w-48 h-48">
+                                <a th:href="@{/spaces/{spaceId}(spaceId=${space.getId()})}">
+                                    <div class="space-options" th:id="${'space-dropdown-button-' + space.getId()}" th:data-dropdown-toggle="${'space-dropdown-' + space.getId()}">
+                                        <svg class="w-3 h-3 text-gray-500 pointer-event-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M5 11.424V1a1 1 0 1 0-2 0v10.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.228 3.228 0 0 0 0-6.152ZM19.25 14.5A3.243 3.243 0 0 0 17 11.424V1a1 1 0 0 0-2 0v10.424a3.227 3.227 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.243 3.243 0 0 0 2.25-3.076Zm-6-9A3.243 3.243 0 0 0 11 2.424V1a1 1 0 0 0-2 0v1.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0V8.576A3.243 3.243 0 0 0 13.25 5.5Z"/>
+                                        </svg>
+                                        <div th:id="${'space-dropdown-' + space.getId()}" class="z-10 hidden bg-white rounded-lg shadow w-44">
+                                            <ul class="py-2 text-sm text-gray-700" th:aria-labelledby="${'space-dropdown-button-' + space.getId()}">
+                                                <li>
+                                                    <a href="?rename" class="block px-4 py-2 hover:bg-gray-100">Rename Space</a>
+                                                </li>
+                                                <li>
+                                                    <p 
+                                                        th:attr="data-space-id=${space.getId()}"
+                                                        data-modal-target="deleteModal" 
+                                                        data-modal-toggle="deleteModal" 
+                                                        class="delete-space-btn block px-4 py-2 hover:bg-gray-100"
+                                                    >
+                                                        Delete Space
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-xs">[[${space.getTitle()}]]</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 

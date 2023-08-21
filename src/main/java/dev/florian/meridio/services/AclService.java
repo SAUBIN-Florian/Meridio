@@ -37,8 +37,6 @@ public class AclService {
         // Bind the fresh acl to the friend Profile & current Space
         currentSpace.setAcls(newAcl);
         friend.setAcls(newAcl);
-        // TODO: Repair KEY_CONSTRAIN_VIOLATION on this:
-        friend.setSpaces(currentSpace);
 
         // Finally store to the database
         this.aclRepository.save(newAcl);
