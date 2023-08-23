@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -29,11 +28,9 @@ public class SpringSecurity {
         return http
             .csrf(csrf -> {
                 csrf.disable();
-                // csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
                 // csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
             })
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                 auth.requestMatchers("/css/**", "/js/**").permitAll();
                 auth.requestMatchers("/auth/register").permitAll();
                 auth.requestMatchers("/**").authenticated();

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import dev.florian.meridio.models.Profile;
@@ -64,6 +67,10 @@ public class ProfileService {
     }
 
     public List<Profile> searchProfiles(String query) {
-        return this.profileRepository.findTop10ByUsernameContaining(query);
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Profile> searchUsers = this.profileRepository.searchUsers(query, pageable);
+        List<Profile> profilesList = searchUsers.getContent();
+        
+        return profilesList;
     }
 }

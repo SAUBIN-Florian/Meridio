@@ -15,21 +15,21 @@
         <div th:replace="~{fragments/sidebar :: sidebar}"></div>
         <div id="main-content" class="p-4">
             <div class="space-detail-header flex justify-between items-center py-2 border-b">
-                <h2>Space: [[${space.getTitle()}]]'s details</h2>
+                <h2 class="text-sm">Space: [[${space.getTitle()}]]'s details</h2>
                 <div class="flex justify-around">
                     <a th:href="@{/spaces/{spaceId}/file/new(spaceId=${space.getId()})}" 
-                    class="block px-4 py-2 hover:bg-blue-500 hover:text-white rounded-lg">Add a file
+                        class="block p-2 mx-2 text-sm transition hover:bg-green-500 hover:text-white rounded-lg">Add files
                     </a>
                     <a th:href="@{/spaces/{spaceId}/add_users(spaceId=${space.getId()})}" 
                         th:if="${space.getProfile().getUsername() == current_user.getUsername()}" 
-                        class="block px-4 py-2 hover:bg-blue-500 hover:text-white rounded-lg">Add a friends
+                        class="block p-2 mx-2 text-sm transition hover:bg-blue-500 hover:text-white rounded-lg">Add friends
                     </a>
                     <p 
                         th:if="${space.getProfile().getUsername() == current_user.getUsername()}" 
                         th:attr="data-space-id=${space.getId()}" 
                         data-modal-target="deleteModal" 
                         data-modal-toggle="deleteModal" 
-                        class="delete-space-btn block px-4 py-2 cursor-pointer hover:bg-red-500 hover:text-white rounded-lg">
+                        class="delete-space-btn block p-2 mx-2 text-sm transition cursor-pointer hover:bg-red-500 hover:text-white rounded-lg">
                         Delete Space
                     </p>
                 </div>
